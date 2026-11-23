@@ -5,34 +5,46 @@ description: "Только PG3D — читает витрину хаба Aghanim
 
 # aghanim-offer-building
 
-## Установка и первый запуск — одна команда
+## Установка и первый запуск
+
+Три отдельные команды, у каждой своя задача.
+
+**1. Поставить скилл.** Клонирует папку в каталог скиллов. Ничего не выполняет — просто кладёт файлы.
 
 ```bash
-git clone https://github.com/fizerbiggard/aghanim-offer-building.git \
-          ~/.claude/skills/aghanim-offer-building \
-  && python3 ~/.claude/skills/aghanim-offer-building/scripts/fetch-aghanim-hub.py --hub live \
-  && python3 ~/.claude/skills/aghanim-offer-building/scripts/hub-check.py
+git clone https://github.com/fizerbiggard/aghanim-offer-building.git ~/.claude/skills/aghanim-offer-building
 ```
 
-Одна строка делает всё: клонирует скилл в каталог скиллов, читает витрину и проверяет конфиг.
-Если видишь разделы с ценами и `ok` по проверкам — скилл на месте и работает.
+**2. Проверить установку.** Читает `config.json`, проверяет пути, свободное место и переменные окружения.
+В сеть не ходит, ничего не запускает.
 
-Windows, PowerShell:
-
-```powershell
-git clone https://github.com/fizerbiggard/aghanim-offer-building.git "$env:USERPROFILE\.claude\skills\aghanim-offer-building"
-py -3 "$env:USERPROFILE\.claude\skills\aghanim-offer-building\scripts\fetch-aghanim-hub.py" --hub live
-py -3 "$env:USERPROFILE\.claude\skills\aghanim-offer-building\scripts\hub-check.py"
+```bash
+python3 ~/.claude/skills/aghanim-offer-building/scripts/hub-check.py
 ```
 
-Каталог скиллов: пользовательский `~/.claude/skills/` или проектный `<проект>/.claude/skills/`.
-Если харнесс берёт скиллы из другого места — клонировать туда же; имя папки = имя скилла.
-
-Дальше для повторных запусков хватает одной строки:
+**3. Прочитать витрину.** Запросы к публичному API хаба, в ответ — разделы, цены, состав, страницы.
 
 ```bash
 python3 ~/.claude/skills/aghanim-offer-building/scripts/fetch-aghanim-hub.py --hub live
 ```
+
+Если нужна одна строка вместо двух — шаги 2 и 3 объединяются через `&&`:
+
+```bash
+python3 ~/.claude/skills/aghanim-offer-building/scripts/hub-check.py \
+  && python3 ~/.claude/skills/aghanim-offer-building/scripts/fetch-aghanim-hub.py --hub live
+```
+
+Windows, PowerShell — те же три команды:
+
+```powershell
+git clone https://github.com/fizerbiggard/aghanim-offer-building.git "$env:USERPROFILE\.claude\skills\aghanim-offer-building"
+py -3 "$env:USERPROFILE\.claude\skills\aghanim-offer-building\scripts\hub-check.py"
+py -3 "$env:USERPROFILE\.claude\skills\aghanim-offer-building\scripts\fetch-aghanim-hub.py" --hub live
+```
+
+Каталог скиллов: пользовательский `~/.claude/skills/` или проектный `<проект>/.claude/skills/`.
+Если харнесс берёт скиллы из другого места — клонировать туда же; имя папки = имя скилла.
 
 ---
 
