@@ -1,0 +1,7 @@
+key
+.aghanim-state.json
+.DS_Store
+unpacked/
+sync_out/
+stage/
+sec.check.sh.enc
