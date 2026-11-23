@@ -1,7 +1,4 @@
-key
-.aghanim-state.json
+__pycache__/
+*.pyc
 .DS_Store
-unpacked/
-sync_out/
-stage/
-sec.check.sh.enc
+snapshot/

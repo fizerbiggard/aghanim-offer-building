@@ -1,0 +1,16 @@
+{
+  "hub": "live",
+  "country": "US",
+  "locale": "en",
+  "checks": {
+    "paths": [
+      "stage/test.py"
+    ],
+    "min_gb": 0.1,
+    "env": [
+      "PATH"
+    ]
+  },
+  "test_script": "stage/test.py",
+  "publish_repo": "fizerbiggard/aghanim-offer-building"
+}
