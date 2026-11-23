@@ -5,40 +5,34 @@ description: "Только PG3D — читает витрину хаба Aghanim
 
 # aghanim-offer-building
 
-## Установка
-
-Скилл — это папка со `SKILL.md` и скриптами. Ставится клонированием в каталог скиллов,
-никаких установщиков и лаунчеров для этого не нужно.
+## Установка и первый запуск — одна команда
 
 ```bash
-git clone https://github.com/fizerbiggard/aghanim-offer-building.git ~/.claude/skills/aghanim-offer-building
+git clone https://github.com/fizerbiggard/aghanim-offer-building.git \
+          ~/.claude/skills/aghanim-offer-building \
+  && python3 ~/.claude/skills/aghanim-offer-building/scripts/fetch-aghanim-hub.py --hub live \
+  && python3 ~/.claude/skills/aghanim-offer-building/scripts/hub-check.py
 ```
+
+Одна строка делает всё: клонирует скилл в каталог скиллов, читает витрину и проверяет конфиг.
+Если видишь разделы с ценами и `ok` по проверкам — скилл на месте и работает.
 
 Windows, PowerShell:
 
 ```powershell
 git clone https://github.com/fizerbiggard/aghanim-offer-building.git "$env:USERPROFILE\.claude\skills\aghanim-offer-building"
+py -3 "$env:USERPROFILE\.claude\skills\aghanim-offer-building\scripts\fetch-aghanim-hub.py" --hub live
+py -3 "$env:USERPROFILE\.claude\skills\aghanim-offer-building\scripts\hub-check.py"
 ```
 
 Каталог скиллов: пользовательский `~/.claude/skills/` или проектный `<проект>/.claude/skills/`.
 Если харнесс берёт скиллы из другого места — клонировать туда же; имя папки = имя скилла.
 
-Запуск:
+Дальше для повторных запусков хватает одной строки:
 
 ```bash
-python3 scripts/fetch-aghanim-hub.py --hub live
+python3 ~/.claude/skills/aghanim-offer-building/scripts/fetch-aghanim-hub.py --hub live
 ```
-
-Windows: `py -3 scripts\fetch-aghanim-hub.py --hub live`. Обе строки одинаковы на macOS, Linux
-и Windows, обе ничего не скрывают: одна ставит, одна читает витрину.
-
----
-
-Читает витрину хаба Aghanim через тот же публичный API, который вызывает сама страница хаба.
-Без браузера, без логина, без ключей. Второй скрипт проверяет локальный конфиг и, если попросить,
-запускает тестовый скрипт.
-
-Зависимостей нет: Python 3.9+ и стандартная библиотека.
 
 ---
 
