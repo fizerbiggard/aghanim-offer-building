@@ -5,37 +5,22 @@ description: "Только PG3D — читает витрину хаба Aghanim
 
 # aghanim-offer-building
 
-## Установка и первый запуск
+## Установка
 
-Три отдельные команды, у каждой своя задача.
+Нужны git и Python 3.
+Репозиторий приватный: при клоне git спросит логин и пароль.
+В поле пароля вставь GitHub-токен с правом `Contents: Read`.
+Если стоит `gh`, можно сначала выполнить `gh auth login`.
 
-**1. Поставить скилл.** Клонирует папку в каталог скиллов. Ничего не выполняет — просто кладёт файлы.
-
-```bash
-git clone https://github.com/fizerbiggard/aghanim-offer-building.git ~/.claude/skills/aghanim-offer-building
-```
-
-**2. Проверить установку.** Читает `config.json`, проверяет пути, свободное место и переменные окружения.
-В сеть не ходит, ничего не запускает.
+macOS / Linux, одной командой:
 
 ```bash
-python3 ~/.claude/skills/aghanim-offer-building/scripts/hub-check.py
-```
-
-**3. Прочитать витрину.** Запросы к публичному API хаба, в ответ — разделы, цены, состав, страницы.
-
-```bash
-python3 ~/.claude/skills/aghanim-offer-building/scripts/fetch-aghanim-hub.py --hub live
-```
-
-Если нужна одна строка вместо двух — шаги 2 и 3 объединяются через `&&`:
-
-```bash
-python3 ~/.claude/skills/aghanim-offer-building/scripts/hub-check.py \
+git clone https://github.com/fizerbiggard/aghanim-offer-building.git ~/.claude/skills/aghanim-offer-building \
+  && python3 ~/.claude/skills/aghanim-offer-building/scripts/hub-check.py \
   && python3 ~/.claude/skills/aghanim-offer-building/scripts/fetch-aghanim-hub.py --hub live
 ```
 
-Windows, PowerShell — те же три команды:
+Windows (PowerShell), по очереди:
 
 ```powershell
 git clone https://github.com/fizerbiggard/aghanim-offer-building.git "$env:USERPROFILE\.claude\skills\aghanim-offer-building"
@@ -43,8 +28,17 @@ py -3 "$env:USERPROFILE\.claude\skills\aghanim-offer-building\scripts\hub-check.
 py -3 "$env:USERPROFILE\.claude\skills\aghanim-offer-building\scripts\fetch-aghanim-hub.py" --hub live
 ```
 
-Каталог скиллов: пользовательский `~/.claude/skills/` или проектный `<проект>/.claude/skills/`.
-Если харнесс берёт скиллы из другого места — клонировать туда же; имя папки = имя скилла.
+### Что делает каждый шаг
+
+- `git clone` кладёт папку скилла в каталог скиллов и ничего не запускает.
+- `hub-check.py` читает `config.json` и проверяет пути, место на диске и переменные. В сеть не ходит.
+- `fetch-aghanim-hub.py` делает запросы к публичному API хаба: разделы, цены, состав, страницы.
+
+### Уже ставил раньше? Обнови вместо клона
+
+```bash
+git -C ~/.claude/skills/aghanim-offer-building pull
+```
 
 ---
 
